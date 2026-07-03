@@ -23,8 +23,5 @@ public class Currency {
     private String code;
 
     @Column(nullable = false)
-    private String name;
-
-
-    
+    private String name; 
 }
