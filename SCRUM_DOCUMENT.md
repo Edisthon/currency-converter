@@ -82,4 +82,42 @@
 | **US-05** | **As a** developer, **I want to** create tests for conversion logic, **so that** I ensure no wrong conversion calculations. | 5 | High | 1 | Done | 1. Successful JUnit tests check for all endpoints.<br>2. Successful tests check for invalid inputs. |
 | **US-06** | **As a** developer, **I want to** set up a CI pipeline **so that** tests and other operations run automatically. | 5 | High | 1 | Done | 1. Use GitHub Actions.<br>2. The GitHub Actions runs a `mvn clean test` on every push.<br>3. Pipeline should show a green indicator upon a successful test pass. |
 
+---
+
+### Sprint 1 Review 
+- **Delivered Work**:
+  - Completed **US-01** (Currency Conversion API `GET /convert`).
+  - Completed **US-02** (Fetch Currencies API `GET /currencies`).
+  - Completed **US-05** (JUnit 5 unit tests for service layer math and MockMvc controller integration tests).
+  - Completed **US-06** (GitHub Actions CI pipeline executing Maven test runs on all pushed commits).
+- **Demo Notes**:
+  - Demonstrated fetching available currencies from PostgreSQL database via `GET /currencies`.
+  - Demonstrated successful USD to EUR conversion at 100.0 amount, returning 92.000 (rounded to exactly 3 decimal places).
+  - Demonstrated custom error handler returning 400 Bad Request and `"Invalid input"` payload when requesting a negative amount.
+  - Verified on GitHub that the CI pipeline successfully compiled the project and ran all tests automatically with a green status.
+
+---
+
+### Sprint 1 Retrospective 
+- **What Went Well**:
+  - In-memory H2 database worked extremely fast for local tests.
+  - Custom Exception Handler is clean and centralized API errors nicely.
+- **What Could Be Improved (Hurdles Faced)**:
+  - **IDE Autocomplete & Spring Versioning**: Encountered deprecated `@MockBean` errors in Spring Boot 3.4+ which required using `@MockitoBean`.
+  - **YAML Schema Errors**: Typos in workflow configuration (`step:` instead of `steps:` and `setup-jave`) caused GitHub Actions to silently ignore the workflow initially.
+- **Improvements to apply in Sprint 2 (At least 2)**:
+  1. **Strict YAML Validation**: Double-check GitHub Action schemas using a YAML formatter or validator before committing to prevent silent syntax failures.
+
+---
+
+## 4. Sprint 2 Planning & Execution
+* **Goals**:
+  1. Implement Admin features (US-03: Add Currency, US-04: Update Rates).
+  2. Integrate logging and monitoring (US-07).
+  3. Apply improvements from Sprint 1 Retrospective.
+* **Capacity Planning**: 8 Story Points (US-03, US-04, US-07).
+
+---
+
+
 
