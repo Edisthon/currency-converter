@@ -1,0 +1,13 @@
+name : Currency Converter
+
+on: 
+  push: 
+    branches: [main, staging, dev]
+  pull_request:
+    branches: [main, staging, dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+
