@@ -2,6 +2,7 @@ package com.example.currency_converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -63,6 +64,18 @@ public class CurrencyServiceTest {
         assertEquals("Invalid input: Amount must be greater than zero", exception.getMessage());
     }
 
+        @Test
+    void testConvert_MissingRate_ThrowsException() {
+
+        when(exchangeRateRepository.findByFromCurrencyAndToCurrency("USD", "JPY"))
+                .thenReturn(Optional.empty());
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            currencyService.convert("USD", "JPY", 100.0);
+        });
+        
+        assertTrue(exception.getMessage().contains("Exchange rate not found"));
+    }
     
 
 }
