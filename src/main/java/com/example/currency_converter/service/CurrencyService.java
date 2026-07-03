@@ -31,7 +31,7 @@ public class CurrencyService {
         log.info("Converting "+amount+ " "+from+ " to " +to);
 
         if (amount < 0){
-            throw new IllegalArgumentException("Amount cannot be less thant zero");
+            throw new IllegalArgumentException("Invalid input: Amount must be greater than zero");
         }
 
         ExchangeRate exchangeRate = exchangeRateRepository.findByFromCurrencyAndToCurrency(from, to)

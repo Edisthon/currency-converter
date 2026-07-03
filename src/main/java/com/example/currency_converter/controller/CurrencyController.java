@@ -61,7 +61,7 @@ public class CurrencyController{
     public ResponseEntity<Map<String, String>> handleInvalidArgs(IllegalArgumentException exception){
         log.warn("Invalid input here ", exception.getMessage());
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Invalid input ", "message", exception.getMessage()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Invalid input", "message", exception.getMessage()));
     }
 
     
