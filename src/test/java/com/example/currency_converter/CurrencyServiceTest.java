@@ -25,6 +25,17 @@ public class CurrencyServiceTest {
     void setUp(){
         MockitoAnnotations.openMocks(this);
     }
+
+    @Test
+    void testConvert_SuccessfulConversionAndRounding() {
+
+        
+        String from = "USD" ;
+        String to = "RWF";
+        double amount = 500;
+        double rate = 0.92345;
+        
+    }
     
 
 }
