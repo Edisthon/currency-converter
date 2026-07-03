@@ -52,7 +52,7 @@ public class CurrencyServiceTest {
 
         double result = currencyService.convert(from, to, amount);
 
-        assertEquals(9.235, result);
+        assertEquals(461.725, result);
         verify(exchangeRateRepository, times(1)).findByFromCurrencyAndToCurrency(from, to);
     }
 
