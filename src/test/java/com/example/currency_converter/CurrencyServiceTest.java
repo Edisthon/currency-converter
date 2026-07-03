@@ -1,6 +1,7 @@
 package com.example.currency_converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,8 +53,16 @@ public class CurrencyServiceTest {
 
         assertEquals(9.235, result);
         verify(exchangeRateRepository, times(1)).findByFromCurrencyAndToCurrency(from, to);
-
     }
+
+    @Test
+    void testConvert_NegativeAmount_ThrowsException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            currencyService.convert("USD", "EUR", -5.0);
+        });
+        assertEquals("Invalid input: Amount must be greater than zero", exception.getMessage());
+    }
+
     
 
 }
