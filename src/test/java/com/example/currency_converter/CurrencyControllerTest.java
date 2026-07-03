@@ -39,5 +39,18 @@ public class CurrencyControllerTest {
     }
 
 
+     @Test
+    void testConvertCurrencyEndpoint_BadRequest() throws Exception {
+        when(currencyService.convert("USD", "EUR", -10.0))
+                .thenThrow(new IllegalArgumentException("Amount must be greater than zero"));
+        mockMvc.perform(get("/convert")
+                .param("from", "USD")
+                .param("to", "EUR")
+                .param("amount", "-10.0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error").value("Invalid input"))
+                .andExpect(jsonPath("$.message").value("Amount must be greater than zero"));
+    }
     
 }
