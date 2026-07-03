@@ -39,6 +39,7 @@ public class CurrencyController{
     }
 
 
+    @GetMapping("/convert")
     public ResponseEntity<Map<String, Object>> convertCurrency(@RequestParam String from,  @RequestParam String to, @RequestParam double amount){
 
         log.info("Converting "+amount+""+from+" to " +to);
