@@ -21,4 +21,10 @@ public class CurrencyServiceTest {
     @InjectMocks
     private CurrencyService currencyService;
 
+    @BeforeEach
+    void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
+    
+
 }
