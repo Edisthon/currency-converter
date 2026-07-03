@@ -1,7 +1,10 @@
 package com.example.currency_converter.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.example.currency_converter.model.Currency;
 import com.example.currency_converter.repository.CurrencyRepository;
 import com.example.currency_converter.repository.ExchangeRateRepository;
 
@@ -15,5 +18,12 @@ public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
     private final ExchangeRateRepository exchangeRateRepository;
+
+    public List<Currency> getAllCurrencies(){
+        log.info("Fetching all available repositories");
+        return currencyRepository.findAll();
+    }
+
+    
     
 }
