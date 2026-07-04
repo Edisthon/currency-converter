@@ -143,6 +143,15 @@
 | **US-04** | As an admin, I want to be able to update the currency exchange rate, so that realtime conversions are up to date. | 2 | Medium | 2 | Done | 1. A successful PUT endpoint with status 200 OK upon successful update.<br>2. A status of 400 Bad Request in case of a violation in the input validation. |
 | **US-07** | As a developer, I want to implement basic monitoring, so that I check the health status of the APIs and also track issues. | 3 | High | 2 | Done | 1. The health status endpoint returns a STATUS OK (status UP). |
 
+---
+
+### Sprint 2 Review
+- **Delivered Work**:
+  - Completed **US-03** (Admin API `POST /currencies` and `POST /rates` returning `201 Created` on success and `409 Conflict` on duplicates).
+  - Completed **US-04** (Admin API `PUT /rates` to update rates, returning `200 OK` on success and `400 Bad Request` on validation failures).
+  - Completed **US-07** (Monitoring using `/actuator/health` and logging using SLF4J).
+  - Completed **Release & Deploy (CD Setup)**: Containerized application with a multi-stage `Dockerfile`, automated image release to Docker Hub via GitHub Actions, provisioned an AWS RDS PostgreSQL database, and successfully deployed to an AWS EC2 instance.
+
 
 
 
