@@ -140,7 +140,7 @@
 | Backlog Item ID | User Story | Story Points | Priority | Sprint | Status | Acceptance Criteria |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | **US-03** | **As an admin, I want to be able to add a new currency and exchange rate, so that a user can be able to use it. | 3 | High | 2 | In Progress | 1. A successful POST of a new currency with return status of 201 Created.<br>2. A return status 409 Conflict if currency already exists. |
-| **US-04** | As an admin, I want to be able to update the currency exchange rate, so that realtime conversions are up to date. | 2 | Medium | 2 | To Do | 1. A successful PUT endpoint with status 200 OK upon successful update.<br>2. A status of 400 Bad Request in case of a violation in the input validation. |
+| **US-04** | As an admin, I want to be able to update the currency exchange rate, so that realtime conversions are up to date. | 2 | Medium | 2 | In progress | 1. A successful PUT endpoint with status 200 OK upon successful update.<br>2. A status of 400 Bad Request in case of a violation in the input validation. |
 | **US-07** | As a developer, I want to implement basic monitoring, so that I check the health status of the APIs and also track issues. | 3 | High | 2 | To Do | 1. The health status endpoint returns a STATUS OK (status UP). |
 
 
