@@ -156,5 +156,19 @@ We wrote 5 additional unit and integration tests (bringing the total to 11 tests
 
 ---
 
+## Endpoint Reference Sheet
+
+Here are all the live REST endpoints exposed by the application:
+
+| Method | Endpoint | Description | Request Body / Query Params | Expected Status |
+| :--- | :--- | :--- | :--- | :---: |
+| **GET** | `/currencies` | Retrieve all supported currencies | None | 200 OK |
+| **GET** | `/convert` | Convert amount between two currencies | `?from=USD&to=EUR&amount=100` | 200 OK |
+| **POST** | `/currencies` | Add a new currency (Admin) | JSON body with `code` and `name` | 201 Created |
+| **POST** | `/rates` | Add a new exchange rate (Admin) | JSON body with `from`, `to`, and `rate` | 201 Created |
+| **PUT** | `/rates` | Update an existing rate (Admin) | `?from=USD&to=EUR&rate=0.95` | 200 OK |
+| **GET** | `/actuator/health` | Check application & DB health | None | 200 OK |
+
+---
 
 
