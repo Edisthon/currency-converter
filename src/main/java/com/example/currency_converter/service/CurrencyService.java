@@ -76,5 +76,16 @@ public class CurrencyService {
         return exchangeRateRepository.save(exchangeRate);
     }
 
+     public ExchangeRate updateExchangeRate(String from, String to, double newRate) {
+        log.info("Admin request: Updating rate from {} to {} to new rate: {}", from, to, newRate);
+        if (newRate <= 0) {
+            throw new IllegalArgumentException("Invalid input: Rate must be greater than zero");
+        }
+        ExchangeRate exchangeRate = exchangeRateRepository.findByFromCurrencyAndToCurrency(from, to)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid input: Exchange rate not found for " + from + " to " + to));
+        exchangeRate.setRate(newRate);
+        return exchangeRateRepository.save(exchangeRate);
+    }
+
     
 }
