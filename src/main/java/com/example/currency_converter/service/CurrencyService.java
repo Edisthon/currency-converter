@@ -58,5 +58,23 @@ public class CurrencyService {
         return currencyRepository.save(currency);
     }
 
+    public ExchangeRate saveExchangeRate(ExchangeRate exchangeRate) {
+        log.info("Admin request: Adding new rate from {} to {} = {}", 
+                exchangeRate.getFromCurrency(), exchangeRate.getToCurrency(), exchangeRate.getRate());
+        if (exchangeRate.getRate() <= 0) {
+            throw new IllegalArgumentException("Invalid input: Rate must be greater than zero");
+        }
+        var existingRate = exchangeRateRepository.findByFromCurrencyAndToCurrency(
+                exchangeRate.getFromCurrency(), exchangeRate.getToCurrency());
+        
+        if (existingRate.isPresent()) {
+            log.warn("Conflict: Exchange rate from {} to {} already exists", 
+                    exchangeRate.getFromCurrency(), exchangeRate.getToCurrency());
+            throw new IllegalStateException("Exchange rate from " + exchangeRate.getFromCurrency() + 
+                    " to " + exchangeRate.getToCurrency() + " already exists");
+        }
+        return exchangeRateRepository.save(exchangeRate);
+    }
+
     
 }
