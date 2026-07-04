@@ -152,7 +152,17 @@
   - Completed **US-07** (Monitoring using `/actuator/health` and logging using SLF4J).
   - Completed **Release & Deploy (CD Setup)**: Containerized application with a multi-stage `Dockerfile`, automated image release to Docker Hub via GitHub Actions, provisioned an AWS RDS PostgreSQL database, and successfully deployed to an AWS EC2 instance.
 
-
+### Sprint 2 Retrospective (Inspect & Adapt)
+- **What Went Well**:
+  - Automating the image release process to Docker Hub on successful build was seamless.
+  - Multi-stage Docker builds kept our final runtime container size very lightweight.
+  - Deploying the app on an EC2 instance and connecting it to a public RDS instance worked smoothly over the internet.
+- **What Could Be Improved (Hurdles Faced)**:
+  - **Docker WSL2 File System Lock**: Encountered a Windows Docker Desktop filesystem lock (`failed to solve: read-only file system`) which required running `wsl --shutdown` in PowerShell to clear the WSL2 mount.
+  - **Lombok/Jackson Serialization mismatch**: Found that the field `private String ID;` in `ExchangeRate.java` was serialized to lowercase `"id"` by Jackson, which initially broke the PUT test assertions (resolved by adjusting the test assertions).
+- **Improvements to apply in future releases**:
+  1. **Align Casing Conventions**: Stick strictly to lowercase `id` fields in entities to avoid Jackson serialization discrepancies.
+  2. **Co-locate Cloud Resources**: Ensure database (RDS) and application servers (EC2) are created in the same AWS region in the future to minimize query latency.
 
 
 
