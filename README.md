@@ -127,4 +127,34 @@ We updated the GitHub Actions workflow to publish the final container image on e
 
 ---
 
+## Sprint 2: Administrative Features, Logging & Monitoring
+
+Sprint 2 focused on security boundaries (Admin APIs), operational logging, and server monitoring to ensure robust system management.
+
+### 1. Administrative Endpoints
+We exposed admin APIs in `CurrencyController.java` to dynamically manipulate currencies and rates in the cloud without needing direct database access:
+* **`POST /currencies`**: Registers a new currency.
+* **`POST /rates`**: Registers a new conversion rate.
+* **`PUT /rates`**: Updates an existing conversion rate.
+
+### 2. Centralized Error & Conflict Handling
+We added a custom exception mapping to handle input constraints and conflicts gracefully:
+* **Conflict (HTTP 409)**: Trying to add a currency or rate pair that already exists throws an `IllegalStateException` which returns a clean JSON error response.
+* **Bad Request (HTTP 400)**: Sending invalid inputs (e.g., negative conversion amounts, negative update rates) returns a validation error response.
+
+### 3. Basic Monitoring & Logging (US-07)
+* **Health Check**: Exposed Spring Boot Actuator `/actuator/health` to allow automated health monitoring of the Spring context and the PostgreSQL database.
+* **Operational Logging**: Implemented SLF4J loggers (via Lombok `@Slf4j`) to write request parameters, warnings, validation failures, and admin operations to the container console.
+
+### 4. Running the Tests
+We wrote 5 additional unit and integration tests (bringing the total to 11 tests) verifying all POST, PUT, and health behaviors. 
+* Execute locally:
+  ```bash
+  .\mvnw clean test
+  ```
+* All 11 tests pass successfully (`BUILD SUCCESS`).
+
+---
+
+
 
