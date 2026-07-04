@@ -89,6 +89,15 @@ public class CurrencyServiceTest {
         assertNotNull(saved.getId());
         assertEquals("CAD", saved.getCode());
     }
+
+    @Test
+    void testSaveCurrency_Conflict_ThrowsException() {
+        Currency duplicate = new Currency(null, "USD", "US Dollar");
+        when(currencyRepository.findByCode("USD")).thenReturn(Optional.of(duplicate));
+        assertThrows(IllegalStateException.class, () -> {
+            currencyService.saveCurrency(duplicate);
+        });
+    }
     
 
 }
