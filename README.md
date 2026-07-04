@@ -86,3 +86,45 @@ To ensure no code breaks on integration, we created a GitHub Actions workflow in
 
 ---
 
+## Containerization & Cloud Infrastructure (Continuous Delivery)
+
+To complete the **Release & Deploy (CD)** stages of our pipeline, we containerized the application and deployed it to the cloud.
+
+### 1. Dockerization
+To standardize the build and execution environment:
+* **Multi-stage Dockerfile**: Separates compilation and packaging from the final runtime execution.
+  * **Stage 1 (Build)**: Compiles the JAR using `maven:3.9.6-eclipse-temurin-21-alpine`.
+  * **Stage 2 (Runtime)**: Runs the JAR on a lightweight `eclipse-temurin:21-jre-alpine` runtime. This keeps the final image small and secure.
+* **Docker Compose**: Created a [docker-compose.yml](docker-compose.yml) file to spin up both the Spring Boot app and a PostgreSQL database locally with a single command (`docker-compose up --build`).
+
+### 2. Automating Image Release to Docker Hub
+We updated the GitHub Actions workflow to publish the final container image on every successful build:
+* Configured encrypted **GitHub Secrets** for Docker Hub credentials (`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`).
+* Added steps to log in to Docker Hub and push the built image tagged with `:latest` and the unique `github.sha` commit code.
+* **CD Release Evidence**: Images build and push automatically, showing up live on Docker Hub.
+
+### 3. Cloud Database Provisioning (AWS RDS)
+* Created an **AWS RDS PostgreSQL** database (`currency-db`) using the **Free Tier** configuration to prevent costs.
+* Set **Public Access** to **Yes** so the app server and pgAdmin could reach it.
+* Modified the **RDS Security Group** to accept incoming PostgreSQL traffic (Port `5432`) from Anywhere (`0.0.0.0/0`).
+* Configured an initial database named `currency_db` so the SQL schema was auto-created.
+
+### 4. Cloud Server Deployment (AWS EC2)
+* Launched a free-tier **AWS EC2 virtual instance** running Amazon Linux 2023.
+* Configured the **EC2 Security Group** to open inbound ports:
+  * Port `22` (SSH) to allow secure server configuration.
+  * Port `8080` (HTTP) to allow access to the Spring Boot REST API.
+* Connected via SSH, installed the Docker engine, started the docker daemon, and added the user to the docker permissions group.
+* Ran the container in detached mode, exposing port `8080` and injecting cloud database credentials via runtime environment variables:
+  ```bash
+  docker run -d -p 8080:8080 \
+    -e SPRING_DATASOURCE_URL=jdbc:postgresql://<RDS_ENDPOINT>:5432/currency_db \
+    -e SPRING_DATASOURCE_USERNAME=postgres \
+    -e SPRING_DATASOURCE_PASSWORD=<PASSWORD> \
+    --name currency-app \
+    --restart always \
+    edisthon/currency-converter:latest
+
+---
+
+
