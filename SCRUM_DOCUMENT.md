@@ -151,6 +151,10 @@
   - Completed **US-04** (Admin API `PUT /rates` to update rates, returning `200 OK` on success and `400 Bad Request` on validation failures).
   - Completed **US-07** (Monitoring using `/actuator/health` and logging using SLF4J).
   - Completed **Release & Deploy (CD Setup)**: Containerized application with a multi-stage `Dockerfile`, automated image release to Docker Hub via GitHub Actions, provisioned an AWS RDS PostgreSQL database, and successfully deployed to an AWS EC2 instance.
+- **Demo Notes**:
+  - Demonstrated checking the API and database health in the cloud via `/actuator/health` (returned `UP` status).
+  - Demonstrated adding a new currency (CAD) and exchange rate (USD to CAD) via Postman on the live EC2 instance.
+  - Demonstrated updating the exchange rate and immediately performing a conversion using the new rate.
 
 ### Sprint 2 Retrospective (Inspect & Adapt)
 - **What Went Well**:
