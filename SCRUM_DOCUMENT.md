@@ -152,11 +152,15 @@
   - Completed **US-07** (Monitoring using `/actuator/health` and logging using SLF4J).
   - Completed **Release & Deploy (CD Setup)**: Containerized application with a multi-stage `Dockerfile`, automated image release to Docker Hub via GitHub Actions, provisioned an AWS RDS PostgreSQL database, and successfully deployed to an AWS EC2 instance.
 - **Demo Notes**:
-  - Demonstrated checking the API and database health in the cloud via `/actuator/health` (returned `UP` status).
-  - Demonstrated adding a new currency (CAD) and exchange rate (USD to CAD) via Postman on the live EC2 instance.
-  - Demonstrated updating the exchange rate and immediately performing a conversion using the new rate.
+  - Demonstrated system monitoring by hitting `GET /actuator/health` on EC2 (successfully returned HTTP 200 OK and `"status": "UP"`).
+  - Demonstrated adding a new currency (CAD) via `POST /currencies` (successfully returned HTTP 201 Created and the saved entity).
+  - Demonstrated conflict error handling by attempting to add a duplicate CAD currency (successfully returned HTTP 409 Conflict).
+  - Demonstrated adding a new exchange rate (USD to CAD) via `POST /rates` (successfully returned HTTP 201 Created).
+  - Demonstrated updating the exchange rate (USD to CAD to 1.380) via `PUT /rates` (successfully returned HTTP 200 OK).
+  - Demonstrated conversion using the newly updated rate via `GET /convert?from=USD&to=CAD&amount=100` (correctly returned `138.000` rounded to 3 decimal places).
+  - Demonstrated input validation error handling by updating the rate to a negative value `-50` (successfully returned HTTP 400 Bad Request).
 
-### Sprint 2 Retrospective (Inspect & Adapt)
+### Sprint 2 Retrospective
 - **What Went Well**:
   - Automating the image release process to Docker Hub on successful build was seamless.
   - Multi-stage Docker builds kept our final runtime container size very lightweight.
