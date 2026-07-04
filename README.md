@@ -17,3 +17,11 @@ To make it easy for evaluators to review this project, here is how the course re
 2. **Codebase**: Spring Boot REST API code under [src/main/java/com/example/currency_converter](src/main/java/com/example/currency_converter).
 3. **CI/CD Evidence**: GitHub Actions workflow file in [.github/workflows/deploy.yaml](.github/workflows/deploy.yaml).
 4. **Testing Evidence**: Service and Integration tests under [src/test/java/com/example/currency_converter](src/test/java/com/example/currency_converter).
+
+### Tech Stack
+* **Java 21** & **Spring Boot 3.x** (Web, JPA, Actuator, Validation)
+* **PostgreSQL** (Production/Cloud database)
+* **H2 Database** (Isolated in-memory test database)
+* **Docker & Docker Compose** (Containerization platform)
+* **GitHub Actions** (CI/CD pipeline orchestrator)
+* **AWS EC2 & AWS RDS** (Cloud deployment infrastructure)
