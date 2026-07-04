@@ -98,6 +98,17 @@ public class CurrencyServiceTest {
             currencyService.saveCurrency(duplicate);
         });
     }
+
+    @Test
+    void testUpdateExchangeRate_Success() {
+        ExchangeRate existing = new ExchangeRate("1", "USD", "EUR", 0.92);
+        when(exchangeRateRepository.findByFromCurrencyAndToCurrency("USD", "EUR"))
+                .thenReturn(Optional.of(existing));
+        when(exchangeRateRepository.save(existing))
+                .thenReturn(new ExchangeRate("1", "USD", "EUR", 0.95));
+        ExchangeRate updated = currencyService.updateExchangeRate("USD", "EUR", 0.95);
+        assertEquals(0.95, updated.getRate());
+    }
     
 
 }
