@@ -179,7 +179,7 @@ Below is the verified visual evidence matching the course deliverables:
 The GitHub Actions workflow compiles the code, resolves dependencies, and executes the entire 11-test suite upon every push.
 * **Pipeline Status**: Successful (Green Indicator)
 
-![GitHub Actions Green Pipeline Run](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image.png)
+![GitHub Actions Green Pipeline Run](assets/image.png)
 
 ---
 
@@ -187,14 +187,14 @@ The GitHub Actions workflow compiles the code, resolves dependencies, and execut
 The test suite consists of 11 passing Unit & Integration tests covering all business operations, rounding math, validation checks, and error controllers.
 * **Maven Test Output**: `BUILD SUCCESS` (11 tests run, 0 failures, 0 errors)
 
-![Local JUnit Test Results](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-1.png)
+![Local JUnit Test Results](assets/image-1.png)
 
 ---
 
 ### 3. pgAdmin Cloud Database Connection (Deliverable 3 & 4)
 The AWS RDS PostgreSQL server running at `currency-db.cix6aaiema5t.us-east-1.rds.amazonaws.com` successfully holds the `currency` and `exchange_rate` tables populated with default conversion records.
 
-![pgAdmin Database Connection & Seed Data](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-2.png)
+![pgAdmin Database Connection & Seed Data](assets/image-2.png)
 
 ---
 
@@ -202,37 +202,34 @@ The AWS RDS PostgreSQL server running at `currency-db.cix6aaiema5t.us-east-1.rds
 Manual Postman executions against the live AWS EC2 server (`http://63.177.108.9:8080`) verified:
 
 #### A. Fetch Supported Currencies (`GET /currencies`)
-![Postman GET currencies response](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-4.png)
+![Postman GET currencies response](assets/image-4.png)
 
 ---
 
 #### B. Currency Conversion Logic (`GET /convert`)
-![Postman GET convert response rounded to 3 decimal places](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-5.png)
+![Postman GET convert response rounded to 3 decimal places](assets/image-5.png)
 
 ---
 
 #### C. Create New Currency (`POST /currencies`)
-![Postman POST currencies response](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-6.png)
+![Postman POST currencies response](assets/image-6.png)
 
 ---
 
 #### D. Create New Exchange Rate (`POST /rates`)
-![Postman POST rates response](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-7.png)
+![Postman POST rates response](assets/image-7.png)
 
 ---
 
 #### E. Update Exchange Rate (`PUT /rates`)
-![Postman PUT rates response](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-8.png)
+![Postman PUT rates response](assets/image-8.png)
 
 ---
 
 #### F. Actuator Health Monitoring (`GET /actuator/health` - US-07)
-![Postman GET Actuator health check returning UP](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-3.png)
+![Postman GET Actuator health check returning UP](assets/image-3.png)
 
 ---
 
 #### G. Exception Handling & Error Validation (`409 Conflict` Duplicates Check)
-![Postman Error Response showing 409 Conflict for duplicates](/Foundational%20Modules/Agile&DevOps/currency-converter/assets/image-9.png)
-
-
-
+![Postman Error Response showing 409 Conflict for duplicates](assets/image-9.png)
