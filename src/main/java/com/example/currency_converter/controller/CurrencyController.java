@@ -93,6 +93,14 @@ public class CurrencyController{
         return ResponseEntity.ok(updated);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Map<String, String>> handleConflict(IllegalStateException ex) {
+        log.warn("Conflict error: {}", ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(Map.of("error", "Conflict", "message", ex.getMessage()));
+    }
+
     
 
     
