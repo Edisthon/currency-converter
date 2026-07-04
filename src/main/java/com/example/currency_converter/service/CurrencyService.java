@@ -46,5 +46,17 @@ public class CurrencyService {
             return bigDecimal.doubleValue();
 
     }
+
+    public Currency saveCurrency(Currency currency) {
+        log.info("Admin request: Adding new currency: {}", currency.getCode());
+        
+        if (currencyRepository.findByCode(currency.getCode()).isPresent()) {
+            log.warn("Conflict: Currency code {} already exists", currency.getCode());
+            throw new IllegalStateException("Currency code " + currency.getCode() + " already exists");
+        }
+        
+        return currencyRepository.save(currency);
+    }
+
     
 }
