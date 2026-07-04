@@ -1,7 +1,9 @@
 package com.example.currency_converter;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.example.currency_converter.model.Currency;
 import com.example.currency_converter.service.CurrencyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -51,6 +54,21 @@ public class CurrencyControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("Invalid input"))
                 .andExpect(jsonPath("$.message").value("Amount must be greater than zero"));
+    }
+
+    @Test
+    void testAddCurrencyEndpoint_Created() throws Exception {
+
+        Currency newCurrency = new Currency("123", "CAD", "Canadian Dollar");
+        when(currencyService.saveCurrency(any(Currency.class))).thenReturn(newCurrency);
+
+        mockMvc.perform(post("/currencies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"code\":\"CAD\",\"name\":\"Canadian Dollar\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value("123"))
+                .andExpect(jsonPath("$.code").value("CAD"))
+                .andExpect(jsonPath("$.name").value("Canadian Dollar"));
     }
     
 }
