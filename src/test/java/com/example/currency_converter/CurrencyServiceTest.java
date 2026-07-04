@@ -1,6 +1,7 @@
 package com.example.currency_converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
@@ -15,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.example.currency_converter.model.Currency;
 import com.example.currency_converter.model.ExchangeRate;
 import com.example.currency_converter.repository.CurrencyRepository;
 import com.example.currency_converter.repository.ExchangeRateRepository;
@@ -75,6 +77,17 @@ public class CurrencyServiceTest {
         });
         
         assertTrue(exception.getMessage().contains("Exchange rate not found"));
+    }
+
+
+    @Test
+    void testSaveCurrency_Success() {
+        Currency newCurrency = new Currency(null, "CAD", "Canadian Dollar");
+        when(currencyRepository.findByCode("CAD")).thenReturn(Optional.empty());
+        when(currencyRepository.save(newCurrency)).thenReturn(new Currency("123", "CAD", "Canadian Dollar"));
+        Currency saved = currencyService.saveCurrency(newCurrency);
+        assertNotNull(saved.getId());
+        assertEquals("CAD", saved.getCode());
     }
     
 
