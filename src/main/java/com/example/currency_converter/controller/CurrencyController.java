@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,6 +80,17 @@ public class CurrencyController{
         log.info("REST Request: Add exchange rate from {} to {}", exchangeRate.getFromCurrency(), exchangeRate.getToCurrency());
         ExchangeRate savedRate = currencyService.saveExchangeRate(exchangeRate);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRate);
+    }
+
+
+    @PutMapping("/rates")
+    public ResponseEntity<ExchangeRate> updateRate(
+            @RequestParam String from,
+            @RequestParam String to,
+            @RequestParam double rate) {
+        log.info("REST Request: Update rate from {} to {} to {}", from, to, rate);
+        ExchangeRate updated = currencyService.updateExchangeRate(from, to, rate);
+        return ResponseEntity.ok(updated);
     }
 
     
