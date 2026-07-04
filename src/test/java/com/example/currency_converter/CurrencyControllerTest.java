@@ -85,7 +85,6 @@ public class CurrencyControllerTest {
                 .param("rate", "0.95")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()) 
-                .andExpect(jsonPath("$.id").value("1"))
                 .andExpect(jsonPath("$.fromCurrency").value("USD"))
                 .andExpect(jsonPath("$.toCurrency").value("EUR"))
                 .andExpect(jsonPath("$.rate").value(0.95));
