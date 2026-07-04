@@ -108,16 +108,34 @@
 - **Improvements to apply in Sprint 2 (At least 2)**:
   1. **Strict YAML Validation**: Double-check GitHub Action schemas using a YAML formatter or validator before committing to prevent silent syntax failures.
 
----
 
-## 4. Sprint 2 Planning & Execution
+---
+### Sprint 2 Planning 
 * **Goals**:
   1. Implement Admin features (US-03: Add Currency, US-04: Update Rates).
   2. Integrate logging and monitoring (US-07).
   3. Apply improvements from Sprint 1 Retrospective.
-* **Capacity Planning**: 8 Story Points (US-03, US-04, US-07).
 
+* **Capacity Planning**: 8 Story Points
+* **User stories to implement
+  1. US-03
+  2. US-04 
+  3. US-07
+
+## 5. Sprint 2 Execution & Improvement
+
+### Sprint Date 
 ---
+* 04/07/2026
+
+### Sprint Goals
+---
+
+  1. Implement Admin features (US-03: Add Currency, US-04: Update Rates).
+  2. Integrate logging and monitoring (US-07).
+  3. Apply improvements from Sprint 1 Retrospective.
+
+### Sprint Backlog
 
 
 
