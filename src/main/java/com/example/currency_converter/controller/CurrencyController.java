@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.currency_converter.model.Currency;
+import com.example.currency_converter.model.ExchangeRate;
 import com.example.currency_converter.service.CurrencyService;
 
 import lombok.RequiredArgsConstructor;
@@ -71,6 +72,13 @@ public class CurrencyController{
         log.info("REST Request: Add currency {}", currency.getCode());
         Currency savedCurrency = currencyService.saveCurrency(currency);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCurrency);
+    }
+
+    @PostMapping("/rates")
+    public ResponseEntity<ExchangeRate> addExchangeRate(@RequestBody ExchangeRate exchangeRate) {
+        log.info("REST Request: Add exchange rate from {} to {}", exchangeRate.getFromCurrency(), exchangeRate.getToCurrency());
+        ExchangeRate savedRate = currencyService.saveExchangeRate(exchangeRate);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedRate);
     }
 
     
